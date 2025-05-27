@@ -17,7 +17,7 @@ public class Application1 {
         System.out.println("con " + con);
 
         Statement stmt = null;  // 쿼리를 운반하고 결과를 반환
-        ResultSet rset = null;   // 조회할 예정 (DML 작업이라면 ResultSet 대신 int로 처리)
+        ResultSet rset = null;   // 조회할 예정 (다른 작업이라면 ResultSet 대신 int로 처리)
 
         try {
             stmt = con.createStatement();

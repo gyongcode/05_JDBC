@@ -7,22 +7,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
-public class Application1 {
+public class Application2 {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Connection con = getConnection();
 
         PreparedStatement pstmt = null;
-        ResultSet rset = null; //
+        ResultSet rset = null;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("메뉴 코드를 입려갛세요 : ");
+        int menuCode = sc.nextInt();
+
+        String query = "SELECT menu_name, menu_price FROM tbl_menu WHERE menu_code = ?";
 
         try {
-            pstmt = con.prepareStatement("SELECT menu_name, menu_price from tbl_menu");
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, menuCode);
             rset = pstmt.executeQuery();
 
             while (rset.next()) {
-                System.out.printf("%s  %d\n", rset.getString("menu_name"),
-                    rset.getInt("menu_price"));
+                System.out.printf("%s, %d", rset.getString(1), rset.getInt(2));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
